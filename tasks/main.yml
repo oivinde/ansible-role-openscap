@@ -14,6 +14,7 @@
     --results {{ ansible_role_openscap_datadir }}/scan.xml \
     --report {{ ansible_role_openscap_datadir }}/scan-report.html \
     /usr/share/xml/scap/ssg/content/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
+  ignore_errors: yes
 
 - name: remediate system
   command: oscap xccdf eval \
