@@ -27,6 +27,6 @@
 - name: upload scap report to Red Hat Cloud Management Services
   command: insights-client \
     --verbose \
-    --payload scan.xml \
+    --payload {{ ansible_role_openscap_datadir }}/scan.xml \
     --content-type application/vnd.redhat.compliance.something+tgz
   when: ansible_role_openscap_upload
