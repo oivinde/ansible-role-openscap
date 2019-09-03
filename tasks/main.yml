@@ -23,6 +23,7 @@
     --results {{ ansible_role_openscap_datadir }}/scan.xml \
     /usr/share/xml/scap/ssg/content/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
   when: ansible_role_openscap_remediate
+  ignore_errors: yes
 
 - name: upload scap report to Red Hat Cloud Management Services
   command: insights-client \
