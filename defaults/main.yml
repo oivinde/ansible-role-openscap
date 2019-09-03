@@ -1,0 +1,9 @@
+---
+# defaults file for ansible-role-openscap
+ansible_role_openscap_datadir: /tmp
+# valid profiles for RHEL8: pci-dss, ospp
+# valid profiles for RHEL7: C2S, nist-800-171-cui, ospp42
+# rht-ccp, cjis, standard, stig-rhel7-disa, hipaa, pci-dss, ospp
+ansible_role_openscap_oscap_profile: ospp
+ansible_role_openscap_upload: false
+ansible_role_openscap_remediate: false
