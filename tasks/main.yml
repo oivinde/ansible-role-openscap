@@ -7,13 +7,22 @@
   with_items:
     - openscap-scanner
     - scap-security-guide
+- name: Set SSG content base path
+  set_fact:
+    ssg_base: /usr/share/xml/scap/ssg/content
+
+- name: deploy tailoring profile
+  copy:
+    src: ssg-rhel8-ds-tailoring.xml
+    dest: "{{ ssg_base }}"
 
 - name: run openscap scan
   command: oscap xccdf eval \
+    --tailoring-file {{ ssg_base }}/ssg-rhel8-ds-tailoring.xml
     --profile xccdf_org.ssgproject.content_profile_{{ ansible_role_openscap_oscap_profile }} \
     --results {{ ansible_role_openscap_datadir }}/scan.xml \
     --report {{ ansible_role_openscap_datadir }}/scan-report.html \
-    /usr/share/xml/scap/ssg/content/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
+    {{ ssg_base }}/ssg-rhe{{ ansible_distribution_major_version }}-ds.xml
   ignore_errors: yes
 
 - name: remediate system
@@ -21,7 +30,7 @@
     --remediate \
     --profile xccdf_org.ssgproject.content_profile_{{ ansible_role_openscap_oscap_profile }} \
     --results {{ ansible_role_openscap_datadir }}/scan.xml \
-    /usr/share/xml/scap/ssg/content/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
+    {{ ssg_base }}/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
   when: ansible_role_openscap_remediate
   ignore_errors: yes
 
