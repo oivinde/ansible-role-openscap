@@ -22,7 +22,7 @@
     --profile xccdf_org.ssgproject.content_profile_{{ ansible_role_openscap_oscap_profile }} \
     --results {{ ansible_role_openscap_datadir }}/scan.xml \
     --report {{ ansible_role_openscap_datadir }}/scan-report.html \
-    {{ ssg_base }}/ssg-rhe{{ ansible_distribution_major_version }}-ds.xml
+    {{ ssg_base }}/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
   ignore_errors: yes
 
 - name: remediate system
