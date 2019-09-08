@@ -31,7 +31,7 @@
     --profile xccdf_org.ssgproject.content_profile_{{ openscap_oscap_profile }} \
     --results {{ openscap_datadir }}/scan.xml \
     {{ ssg_base }}/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
-  when: ansible_role_openscap_remediate
+  when: openscap_remediate
   ignore_errors: yes
 
 - name: upload scap report to Red Hat Cloud Management Services
@@ -39,4 +39,4 @@
     --verbose \
     --payload {{ openscap_datadir }}/scan.xml \
     --content-type application/vnd.redhat.compliance.something+tgz
-  when: ansible_role_openscap_upload
+  when: openscap_upload
