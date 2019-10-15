@@ -11,15 +11,16 @@
   set_fact:
     ssg_base: /usr/share/xml/scap/ssg/content
 
-- name: deploy tailoring profile
-  copy:
-    src: ssg-rhel8-ds-tailoring.xml
-    dest: "{{ ssg_base }}"
+#- name: deploy tailoring profile
+#  copy:
+#    src: ssg-rhel8-ds-tailoring.xml
+#    dest: "{{ ssg_base }}"
 
 - name: run openscap scan
   command: oscap xccdf eval \
-    --tailoring-file {{ ssg_base }}/ssg-rhel8-ds-tailoring.xml
-    --profile xccdf_org.ssgproject.content_profile_ospp_customized \
+ #   --tailoring-file {{ ssg_base }}/ssg-rhel8-ds-tailoring.xml
+ #   --profile xccdf_org.ssgproject.content_profile_ospp_customized \
+    --profile xccdf_org.ssgproject.content_profile_ospp \
     --results {{ openscap_datadir }}/scan.xml \
     --report {{ openscap_datadir }}/scan-report.html \
     {{ ssg_base }}/ssg-rhel{{ ansible_distribution_major_version }}-ds.xml
